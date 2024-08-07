@@ -1,0 +1,17 @@
+{
+    "dmsUri": "[URL API DMS]",
+    "dmsUser": "[USER DMS]",
+    "dmsPass": "[PASS DMS]",
+    "dmsQuery": "[QUERY DMS]",
+    "queryPageSize": 5,
+    "maxPagesToQuery": 1,
+    "workingMode": 1,
+    "purgeFiles": true,
+    "targetFolder": "[TARGET FOLDER]",
+    "tempFolder": "[TEMP FOLDER]",
+    "transformJpegToBase64TextFile": true,
+    "popplerBinariesPath": "./Bin/poppler-24.02.0/Library/bin",
+    "truncatePdfPages": false,
+    "pdfMaxPages": 2,
+    "jpegDpi": 100
+}
