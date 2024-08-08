@@ -1,6 +1,8 @@
+import logging
 class Config():
 
-
+    # Logging system
+    logger = logging.getLogger(__name__)
 
     #Process working modes
     # 0 => Get PDF files from DMS Item. Addiontally truncate pages of PDF to PARAM_PDF_MAX_PAGES, only if PARAM_TRUNCATE_PDF_PAGES is True
@@ -49,10 +51,26 @@ class Config():
         return self.app_cfg[self.PARAM_DMS_QUERY]
 
     def get_query_pagesize(self):
-        return self.app_cfg[self.PARAM_DMS_QUERY_PAGE_SIZE]
-
+        default = 100
+        value = self.app_cfg[self.PARAM_DMS_QUERY_PAGE_SIZE]    
+        if isinstance(value, int):
+            if value > 0 and value <= 1000:
+                return value    
+        
+        self.logger.warn(f"Invalid value for {self.PARAM_DMS_QUERY_PAGE_SIZE} parameter {value}. Using default {default}")
+        return default        
+    
     def get_max_pages_to_query(self):
-        return self.app_cfg[self.PARAM_MAX_PAGES_TO_QUERY]
+        default = -1
+        value = self.app_cfg[self.PARAM_MAX_PAGES_TO_QUERY]
+        if isinstance(value, int):
+            if value >= default and value <= 1000:
+                if value != 0:
+                    return value
+            
+        self.logger.warn(f"Invalid value for {self.PARAM_MAX_PAGES_TO_QUERY} parameter {value}. Using default {default}")
+        return default        
+
 
 
 

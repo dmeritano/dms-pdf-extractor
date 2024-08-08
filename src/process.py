@@ -73,9 +73,9 @@ def extract_images_from_pdfs(documents):
         print("Extract images/base64 data from PDF files started ...")
 
         for idx, idDms in enumerate(documents):
+            sleep(1)
             msg = f"Processing ID {idDms} - {str(idx + 1).zfill(5)} of {str(num_docs).zfill(5)}"
-            logger.info(msg)
-                   
+            logger.info(msg)                               
             item_bytes = api_dms.get_multimedia_item_bytes(idDms)
             if len(item_bytes) > 0:
                 pdf_pages = convert_from_bytes(item_bytes, poppler_path=app_config.get_poppler_binaries_path(), dpi=app_config.get_jpeg_dpi())
@@ -118,10 +118,9 @@ def get_pdfs(documents):
     temp_dir = app_config.get_temp_folder()
     try:
         for idx, idDms in enumerate(documents):
+            sleep(1)
             msg = f"Processing ID {idDms} - {str(idx + 1).zfill(5)} of {str(num_docs).zfill(5)}"
             logger.info(msg)
-
-            sleep(0.5)
             temp_file = f"{temp_dir}/{idDms}.pdf"
             final_file = get_output_file_name_with_path(idDms,None,".pdf")            
 
@@ -186,7 +185,7 @@ def control_pdf_pages(idDms, temp_file, final_file):
 
 def get_output_file_name_with_path(idDms,page,extension):
     try:        
-        subfolder = idDms[-1:]
+        subfolder = idDms[-2:]
         complete_path = f"{app_config.get_target_folder()}/{subfolder}"
         if not os.path.exists(complete_path):
             os.makedirs(complete_path)
